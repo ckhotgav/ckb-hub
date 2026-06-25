@@ -2,6 +2,7 @@
 id: env_setup
 title: API 金鑰管家
 description: 安全地引導使用者配置系統環境變數與敏感金鑰，避免外洩。
+tooltip: 協助建立與管理 .env 檔案。
 category: 基礎設定與助理
 ---
 # 基礎環境建置

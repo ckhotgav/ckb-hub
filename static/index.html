@@ -243,10 +243,11 @@
                     });
 
                     categorySkills.forEach(skill => {
+                        const tooltipHtml = skill.tooltip ? `<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">${skill.tooltip}</span></div>` : '';
                         html += `
                             <div class="skill-card">
                                 <div class="skill-info">
-                                    <h3>${skill.title}</h3>
+                                    <h3>${skill.title}${tooltipHtml}</h3>
                                     <p>${skill.description}</p>
                                 </div>
                                 <label class="switch">
