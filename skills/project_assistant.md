@@ -1,6 +1,6 @@
 ---
 id: project_assistant
-title: 01. 點哥專案助理 (核心)
+title: 點哥專案助理 (核心)
 description: 自動幫你建立專案結構、管理進度表，並支援開工與收工流程。
 category: 基礎設定與助理
 ---

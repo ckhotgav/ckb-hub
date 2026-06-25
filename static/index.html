@@ -223,8 +223,16 @@
                     categories[cat].push(skill);
                 });
                 
+                // 確保「基礎設定與助理」分類永遠排在最前面
+                const sortedCategoryNames = Object.keys(categories).sort((a, b) => {
+                    if (a === "基礎設定與助理") return -1;
+                    if (b === "基礎設定與助理") return 1;
+                    return a.localeCompare(b);
+                });
+                
                 // 產生 HTML
-                for (const [categoryName, categorySkills] of Object.entries(categories)) {
+                for (const categoryName of sortedCategoryNames) {
+                    const categorySkills = categories[categoryName];
                     let html = `<div class="category"><h2 class="category-title">${categoryName}</h2>`;
                     
                     // 按照 ID 字母排序，但強制把 project_assistant 放第一
