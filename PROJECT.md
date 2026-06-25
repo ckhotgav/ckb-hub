@@ -11,7 +11,7 @@
 ### 🔜 未來發展計畫 (Roadmap)
 - [ ] **實作「自動尋找外掛」模式 (Auto-Discovery Plugin Architecture)**
   - 建立 `plugins/` 目錄，支援動態讀取 `.json` 外掛設定。
-  - 將網頁 UI 與 `mcp_stdio.py` 改為自動生成按鈕，實現「把檔案丟進去就自動生出技能」的終極小白體驗。
+  - 將網頁 UI 與 `mcp_stdio.py` 改為自動生成按鈕，實現「把檔案丟進去就自動生出技能」的終極初學者體驗。
 - [ ] 考慮升級至 MetaMCP 官方架構 (依 README.md 建議，當需要複雜的雲端多伺服器時)
 
 ---

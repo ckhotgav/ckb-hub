@@ -1,6 +1,6 @@
 # CKB Hub (點哥專案助理)
 
-CKB Hub 是一個專為「無程式基礎新手 (小白)」設計的輕量級 MCP (Model Context Protocol) 聚合管理工具。
+CKB Hub 是一個專為「無程式基礎新手 (初學者)」設計的輕量級 MCP (Model Context Protocol) 聚合管理工具。
 它提供了一個極度簡化的視覺化介面，讓使用者可以一鍵開關各種 AI 技能，並透過 `mcp_stdio.py` 讓 AI 助理自動感知目前專案的狀態（開工/收工）。
 
 ## 核心設計理念 (The "Beginner-First" Approach)
