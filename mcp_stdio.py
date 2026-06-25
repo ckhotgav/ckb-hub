@@ -32,6 +32,22 @@ def is_skill_enabled(skill_id: str) -> bool:
         session_status = load_global_status()
     return session_status.get(skill_id, False)
 
+def check_skill(skill_id: str, default_message: str) -> str:
+    """檢查技能是否啟用，並嘗試從 skills/ 資料夾載入點哥寫好的超長 Prompt 規則檔"""
+    if not is_skill_enabled(skill_id):
+        return f"⚠️ 【錯誤】技能 [{skill_id}] 尚未啟用。請提醒使用者到控制台打開開關。"
+    
+    skill_file = os.path.join(BASE_DIR, "skills", f"{skill_id}.md")
+    if os.path.exists(skill_file):
+        try:
+            with open(skill_file, "r", encoding="utf-8") as f:
+                prompt = f.read()
+            return f"[SUCCESS] {default_message}\n\n[👇 系統加載專屬技能指令 ({skill_id}) 👇]\n---\n{prompt}\n---\n[🤖 給 AI 的最高指令：請嚴格遵守上方點哥撰寫的規則來執行任務！]"
+        except Exception as e:
+            return f"[SUCCESS] {default_message}\n(註：讀取技能檔失敗 {e})"
+            
+    return f"[SUCCESS] {default_message} (註：此技能目前使用系統預設邏輯，尚未掛載自訂的 .md 技能說明檔)"
+
 @mcp.tool()
 def init_project(project_name: str, project_type: str, required_skills: list[str], base_path: str = ".") -> str:
     """
@@ -205,10 +221,7 @@ def deploy_to_netlify() -> str:
     """
     一鍵部署靜態網頁到 Netlify。
     """
-    if not is_skill_enabled("netlify_deploy"):
-        return "⚠️ 【錯誤】Netlify 部署功能尚未在 CKB-Hub 中啟用。請提醒使用者先到網頁控制台打開開關，或將其加入專案的 .ckb_config.json 中。"
-    
-    return "[SUCCESS] Netlify 部署準備就緒！(請呼叫 Netlify 官方 MCP 或執行 npx netlify deploy --prod)"
+    return check_skill("netlify_deploy", "Netlify 部署準備就緒！(請執行 npx netlify deploy --prod 或依據下方規則執行)")
 
 # ==========================================
 # 基礎設定與助理
@@ -216,8 +229,7 @@ def deploy_to_netlify() -> str:
 @mcp.tool()
 def setup_environment_variables() -> str:
     """API 金鑰管家"""
-    if not is_skill_enabled("env_setup"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請協助使用者建立 .env 檔案，並安全地檢查與配置重要的 API 金鑰。"
+    return check_skill("env_setup", "請協助使用者建立 .env 檔案，並安全地檢查與配置重要的 API 金鑰。")
 
 # ==========================================
 # 靜態與主機部署 (其餘部署工具)
@@ -225,32 +237,27 @@ def setup_environment_variables() -> str:
 @mcp.tool()
 def deploy_cloudflare() -> str:
     """Cloudflare 網頁部署"""
-    if not is_skill_enabled("cloudflare_deploy"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] Cloudflare 部署啟動！請協助使用者使用 Wrangler CLI 將專案發布至 Cloudflare Pages 或 Workers。"
+    return check_skill("cloudflare_deploy", "Cloudflare 部署啟動！請協助使用者使用 Wrangler CLI 將專案發布至 Cloudflare Pages 或 Workers。")
 
 @mcp.tool()
 def deploy_to_gas() -> str:
     """Google Apps Script 部署"""
-    if not is_skill_enabled("gas_deploy"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請使用 clasp 工具協助使用者將本地程式碼推送到 Google Apps Script 專案。"
+    return check_skill("gas_deploy", "請使用 clasp 工具協助使用者將本地程式碼推送到 Google Apps Script 專案。")
 
 @mcp.tool()
 def deploy_custom_server() -> str:
     """自訂伺服器部署"""
-    if not is_skill_enabled("custom_deploy"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請協助使用者撰寫 SSH 登入腳本或 RSYNC 同步指令以部署至自訂主機。"
+    return check_skill("custom_deploy", "請協助使用者撰寫 SSH 登入腳本或 RSYNC 同步指令以部署至自訂主機。")
 
 @mcp.tool()
 def deploy_ftp_hosting() -> str:
     """傳統虛擬主機 FTP 部署"""
-    if not is_skill_enabled("ftp_hosting"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請協助使用者設定 FTP 上傳腳本，將 dist/ 或 public/ 資料夾上傳至虛擬主機。"
+    return check_skill("ftp_hosting", "請協助使用者設定 FTP 上傳腳本，將 dist/ 或 public/ 資料夾上傳至虛擬主機。")
 
 @mcp.tool()
 def deploy_ftp_php() -> str:
     """PHP 專案 FTP 部署"""
-    if not is_skill_enabled("ftp_php"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請協助使用者封裝 PHP 專案，避開 vendor/，並產生 FTP 自動上傳配置檔。"
+    return check_skill("ftp_php", "請協助使用者封裝 PHP 專案，避開 vendor/，並產生 FTP 自動上傳配置檔。")
 
 # ==========================================
 # 雲端資料庫
@@ -258,14 +265,12 @@ def deploy_ftp_php() -> str:
 @mcp.tool()
 def setup_supabase() -> str:
     """Supabase 資料庫串接"""
-    if not is_skill_enabled("supabase_setup"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] Supabase 串接啟動！請引導使用者提供 URL 與 API Key，並協助設定 RLS 與 Table 結構。"
+    return check_skill("supabase_setup", "Supabase 串接啟動！請引導使用者提供 URL 與 API Key，並協助設定 RLS 與 Table 結構。")
 
 @mcp.tool()
 def setup_firebase() -> str:
     """Firebase 服務串接"""
-    if not is_skill_enabled("firebase_setup"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] Firebase 串接啟動！請協助整合 Firestore、Authentication 等 SDK。"
+    return check_skill("firebase_setup", "Firebase 串接啟動！請協助整合 Firestore、Authentication 等 SDK。")
 
 # ==========================================
 # AI 工具與模型
@@ -273,14 +278,12 @@ def setup_firebase() -> str:
 @mcp.tool()
 def export_to_notebooklm() -> str:
     """匯出至 NotebookLM"""
-    if not is_skill_enabled("notebooklm"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請將目前的原始碼架構、文件打包合併為單一 Markdown 檔，方便使用者匯入 NotebookLM 閱讀。"
+    return check_skill("notebooklm", "請將目前的原始碼架構、文件打包合併為單一 Markdown 檔，方便使用者匯入 NotebookLM 閱讀。")
 
 @mcp.tool()
 def setup_gemini_api() -> str:
     """Gemini API 串接"""
-    if not is_skill_enabled("gemini_api"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請協助使用者將 Google Gemini API 整合至專案中，並撰寫串接範例代碼。"
+    return check_skill("gemini_api", "請協助使用者將 Google Gemini API 整合至專案中，並撰寫串接範例代碼。")
 
 # ==========================================
 # 專案與編輯器
@@ -288,14 +291,12 @@ def setup_gemini_api() -> str:
 @mcp.tool()
 def sync_to_obsidian() -> str:
     """Obsidian 知識庫同步"""
-    if not is_skill_enabled("obsidian_sync"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請將本日的開發日誌轉換為 Obsidian 雙向連結格式，並儲存至使用者的筆記資料夾。"
+    return check_skill("obsidian_sync", "請將本日的開發日誌轉換為 Obsidian 雙向連結格式，並儲存至使用者的筆記資料夾。")
 
 @mcp.tool()
 def guide_knowledge_base() -> str:
     """專案知識庫導航"""
-    if not is_skill_enabled("knowledge_guide"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請撰寫或更新 PROJECT.md 與 README.md，幫助其他 AI 或開發者快速了解專案目錄結構與核心邏輯。"
+    return check_skill("knowledge_guide", "請撰寫或更新 PROJECT.md 與 README.md，幫助快速了解專案目錄結構。")
 
 # ==========================================
 # 診斷與維護
@@ -303,20 +304,17 @@ def guide_knowledge_base() -> str:
 @mcp.tool()
 def run_project_doctor() -> str:
     """專案健檢醫生"""
-    if not is_skill_enabled("project_doctor"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 健檢模式啟動！請對專案原始碼進行靜態分析，找出潛在的效能瓶頸與語法錯誤。"
+    return check_skill("project_doctor", "健檢模式啟動！請對專案原始碼進行靜態分析，找出潛在的效能瓶頸與語法錯誤。")
 
 @mcp.tool()
 def upgrade_packages() -> str:
     """套件衝突排解專家"""
-    if not is_skill_enabled("pkg_upgrade"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 請檢查 package.json 或 requirements.txt 中過期的套件，並協助安全升級且解決依賴衝突。"
+    return check_skill("pkg_upgrade", "請檢查 package.json 或 requirements.txt 中過期的套件，並協助安全升級。")
 
 @mcp.tool()
 def troubleshoot_errors() -> str:
     """疑難排解專家"""
-    if not is_skill_enabled("troubleshoot"): return "[WARNING] 技能尚未啟用。"
-    return "[SUCCESS] 除錯模式啟動！請引導使用者貼上終端機錯誤日誌，並提供三種以上的可能解決方案與排查步驟。"
+    return check_skill("troubleshoot", "除錯模式啟動！請引導使用者貼上終端機錯誤日誌，並提供可能解決方案。")
 
 if __name__ == "__main__":
     # 使用 stdio 啟動 MCP 伺服器 (供 AI 編輯器串接)
