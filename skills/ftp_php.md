@@ -1,9 +1,4 @@
----
-name: 20-ftp-php
-description: PHP + MySQL 資料庫 — 從靜態網頁升級為動態網站（需先完成技能 19）。
----
-
-# 20-PHP + MySQL 資料庫（進階延伸）
+# PHP + MySQL 資料庫（進階延伸）
 
 **先决條件**：你已經完成技能 19，擁有免費主機帳號（ProFreeHost 或 InfinityFree）、已上傳網頁、並建立了 MySQL 資料庫。
 

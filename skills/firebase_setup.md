@@ -1,8 +1,3 @@
----
-name: 07-firebase
-description: Firebase 雲端資料庫 — 安裝 firebase-tools 並登入，初始化 Firestore。
----
-
 # Firebase 雲端資料庫
 
 Google 提供的即時 NoSQL 資料庫。

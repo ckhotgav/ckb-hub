@@ -1,8 +1,3 @@
----
-name: 14-doctor
-description: 系統健康檢查 — 診斷本機 Node.js、npm、Python、Git 及 CLI 版本狀態，提供自癒式修復。
----
-
 # 系統健康檢查
 
 當你發現 AI 指令執行失敗時，請使用此技能。

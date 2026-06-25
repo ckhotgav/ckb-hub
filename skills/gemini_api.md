@@ -1,8 +1,3 @@
----
-name: 09-gemini
-description: Gemini 免費 API — 申請 API 金鑰，使用 @google/generative-ai SDK 寫測試程式。
----
-
 # Gemini 免費 API 串接
 
 直接呼叫 Google 的 AI 能力來為你的網頁進行智慧加持。

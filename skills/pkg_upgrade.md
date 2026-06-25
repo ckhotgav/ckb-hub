@@ -1,8 +1,3 @@
----
-name: 15-upgrade
-description: 一鍵升級工具 — 更新 npm、pip 以及各種已安裝的 CLI 工具。
----
-
 # 一鍵升級工具
 
 將本機所有的 CLI 套件一鍵更新至最新版本。

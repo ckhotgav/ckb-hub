@@ -1,8 +1,3 @@
----
-name: 11-obsidian
-description: Obsidian 本地筆記連結 — 安裝 mcpvault，詢問筆記庫路徑後自動修改 mcp_config.json 註冊 mcpServers。
----
-
 # Obsidian 本地筆記連結
 
 將你的本地筆記庫「第二大腦」與 AI 助理直接打通。

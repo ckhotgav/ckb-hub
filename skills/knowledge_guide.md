@@ -1,8 +1,3 @@
----
-name: 12-knowledge-guide
-description: 知識管理引導 — 在 Obsidian 建立三層目錄（收件匣、專案、每日筆記）與日記模板。
----
-
 # Obsidian 知識管理設定
 
 建立合理的筆記結構，讓你的知識庫井井有條。

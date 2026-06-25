@@ -1,9 +1,4 @@
----
-name: 19-ftp-hosting
-description: FTP 免費主機 — 使用 ProFreeHost 或 InfinityFree 免費架設網站與建立 MySQL 資料庫。
----
-
-# 19-FTP 免費主機（網站架設）
+# FTP 免費主機（網站架設）
 
 這個技能教你用免費主機把網頁放到網路上，讓任何人都能瀏覽。
 

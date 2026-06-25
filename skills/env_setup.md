@@ -1,8 +1,3 @@
----
-name: 01-env-setup
-description: 基礎環境建置 — 安裝 Node.js 與 Python 並配置 PowerShell 權限。
----
-
 # 基礎環境建置
 
 在開始使用 AI 開發之前，需要先安裝基礎的「底座工具」。
