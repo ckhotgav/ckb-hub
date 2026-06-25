@@ -2,6 +2,7 @@
 id: notebooklm
 title: 匯出至 NotebookLM
 description: 將專案原始碼打包成適合 NotebookLM 閱讀的文本格式。
+tooltip: 將專案所有程式碼打包成單一 Markdown 檔，方便餵給 AI 分析。
 category: AI 工具與模型
 ---
 # NotebookLM 知識庫串接

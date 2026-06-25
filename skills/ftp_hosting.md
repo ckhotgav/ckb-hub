@@ -2,6 +2,7 @@
 id: ftp_hosting
 title: 傳統虛擬主機 FTP
 description: 引導配置 FTP 參數，上傳靜態資源至傳統主機。
+tooltip: 傳統虛擬主機打包上傳工具，將 dist 目錄打包為 ZIP。
 category: 靜態與主機部署
 ---
 # FTP 免費主機（網站架設）

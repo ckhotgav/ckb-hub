@@ -2,6 +2,7 @@
 id: project_doctor
 title: 專案健檢醫生
 description: 對全專案進行健康檢查，找出語法錯誤與效能瓶頸。
+tooltip: 對整個專案進行健康掃描，抓出效能瓶頸與潛在語法錯誤。
 category: 診斷與維護
 ---
 # 系統健康檢查

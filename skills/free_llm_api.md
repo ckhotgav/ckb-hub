@@ -2,6 +2,7 @@
 id: free_llm_api
 title: 免費 AI API 串接
 description: 協助申請免費額度的 AI 服務 (如 Gemini, Groq 等)，並引導如何在專案中實作串接。
+tooltip: 申請免費額度的 Gemini 或 Groq 金鑰，並完成對話程式測試。
 category: AI 工具與模型
 ---
 # 免費 AI API 串接與實作指南

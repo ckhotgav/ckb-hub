@@ -2,6 +2,7 @@
 id: firebase_setup
 title: Firebase 服務
 description: 串接 Firebase Firestore 資料庫與身份認證。
+tooltip: 引導初始化 Firebase SDK，並確保資料庫存取規則安全。
 category: 雲端資料庫
 ---
 # Firebase 雲端資料庫

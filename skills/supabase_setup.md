@@ -2,6 +2,7 @@
 id: supabase_setup
 title: Supabase 資料庫
 description: 引導串接 Supabase，處理資料庫表結構與身份驗證。
+tooltip: 目前最強大的開源 Postgres 資料庫，支援完整的 RLS 權限管理。
 category: 雲端資料庫
 ---
 # Supabase 雲端資料庫

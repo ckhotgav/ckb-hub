@@ -2,6 +2,7 @@
 id: custom_deploy
 title: 自訂伺服器部署
 description: 協助設定與部署程式碼至私有 VPS 或自訂主機。
+tooltip: 教導如何透過 RSYNC 部署程式碼到自訂的 VPS 虛擬主機。
 category: 靜態與主機部署
 ---
 # 自訂伺服器部署 (SSH / RSYNC) 任務守則

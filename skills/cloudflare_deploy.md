@@ -2,6 +2,7 @@
 id: cloudflare_deploy
 title: Cloudflare 網頁部署
 description: 高速發布！讓 AI 協助將靜態網頁或 Fullstack 專案部署至 Cloudflare Pages。
+tooltip: 使用 Wrangler 一鍵部署靜態網頁或建立臨時測試網址。
 category: 靜態與主機部署
 ---
 # 其他雲端部署平台

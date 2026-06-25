@@ -2,6 +2,7 @@
 id: pkg_upgrade
 title: 套件衝突排解專家
 description: 專門解決 npm/pip 升級失敗、依賴衝突等棘手問題。
+tooltip: 專治 npm 或 pip 的版本衝突與依賴錯誤，幫你理清相依死結。
 category: 診斷與維護
 ---
 # 一鍵升級工具

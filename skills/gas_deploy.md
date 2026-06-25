@@ -2,6 +2,7 @@
 id: gas_deploy
 title: Google Apps Script 部署
 description: 協助編寫與部署 Google Apps Script 自動化腳本。
+tooltip: 透過 Clasp 工具將本地專案無縫推送到 Google Apps Script。
 category: 靜態與主機部署
 ---
 # Google Apps Script 自動化

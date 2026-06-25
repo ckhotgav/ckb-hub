@@ -2,6 +2,7 @@
 id: ftp_php
 title: PHP 專案 FTP 部署
 description: 安全且結構化地發布 PHP 後端至 CPanel 虛擬主機。
+tooltip: 專為 PHP 專案設計，上傳時自動忽略 vendor 等巨大資料夾。
 category: 靜態與主機部署
 ---
 # PHP + MySQL 資料庫（進階延伸）

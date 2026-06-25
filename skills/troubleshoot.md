@@ -2,6 +2,7 @@
 id: troubleshoot
 title: 疑難排解大師
 description: 啟用深度的除錯模式，解決卡關超過 30 分鐘的疑難雜症。
+tooltip: 當卡關超過 30 分鐘必開！深度分析 Log 錯誤並提出突破方案。
 category: 診斷與維護
 ---
 # 疑難排解

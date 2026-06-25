@@ -2,6 +2,7 @@
 id: knowledge_guide
 title: 專案知識庫導航
 description: 產生專案導讀文件，讓新的 AI 會話能光速上手程式碼。
+tooltip: 為專案產生清晰的導讀地圖 (README.md)，讓接手的人秒懂。
 category: 專案與知識庫
 ---
 # Obsidian 知識管理設定

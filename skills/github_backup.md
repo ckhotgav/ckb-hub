@@ -2,6 +2,7 @@
 id: github_backup
 title: GitHub 自動備份
 description: 提供 AI 穩定的 GitHub 同步能力，不再發生終端機指令錯誤。
+tooltip: 安全的版控助理，自動幫你想好 Commit 訊息並推送進度。
 category: 靜態與主機部署
 ---
 # GitHub 自動備份任務守則
