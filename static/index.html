@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKB-Hub 點哥AI萬用工具箱</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eef2f5;
+            padding-bottom: 15px;
+            margin-top: 0;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .skill-card {
+            border: 1px solid #eef2f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            border-color: #d5dbdb;
+        }
+        .skill-info {
+            flex-grow: 1;
+        }
+        .skill-info h3 {
+            margin: 0 0 5px 0;
+            color: #2980b9;
+            display: flex;
+            align-items: center;
+        }
+        .help-icon {
+            display: inline-block;
+            margin-left: 8px;
+            width: 18px;
+            height: 18px;
+            background-color: #ecf0f1;
+            color: #7f8c8d;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 12px;
+            line-height: 18px;
+            cursor: help;
+            font-weight: normal;
+        }
+        .skill-info p {
+            margin: 0;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        /* Toggle Switch CSS */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 15px;
+        }
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2ecc71;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        #log-area {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            margin-top: 30px;
+            height: 150px;
+            overflow-y: auto;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .log-time { color: #8e44ad; }
+        .log-action { color: #2ecc71; }
+        .log-warning { color: #f1c40f; }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #34495e;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85em;
+            font-weight: normal;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #34495e transparent transparent transparent;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CKB-Hub 點哥AI萬用工具箱</h1>
+    <p class="subtitle">簡單、乾淨、一鍵管理你的所有 AI 技能，徹底拋棄複雜的指令與設定檔。</p>
+
+    <!-- Skill 1 -->
+    <div class="skill-card">
+        <div class="skill-info">
+            <h3>
+                點哥專案助理 (核心)
+                <div class="tooltip"><span class="help-icon">?</span>
+                    <span class="tooltiptext">這項工具能讓 AI 讀懂你的開發進度表。啟用後，只需對 AI 說「開工」或「收工」，它就會自動幫你記錄與備份。</span>
+                </div>
+            </h3>
+            <p>自動幫你建立專案結構、管理進度表，並支援開工與收工流程。</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="project_assistant" onchange="toggleSkill('project_assistant', this.checked)">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Skill 2 -->
+    <div class="skill-card">
+        <div class="skill-info">
+            <h3>
+                GitHub 自動備份
+                <div class="tooltip"><span class="help-icon">?</span>
+                    <span class="tooltiptext">讓 AI 安全地與你的 GitHub 互動。不再需要讓 AI 自己去打 git commit 指令，此工具提供穩定、防護的備份 API。</span>
+                </div>
+            </h3>
+            <p>提供 AI 穩定的 GitHub 同步能力，不再發生終端機指令錯誤。</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="github_backup" onchange="toggleSkill('github_backup', this.checked)">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <!-- Skill 3 -->
+    <div class="skill-card">
+        <div class="skill-info">
+            <h3>
+                Netlify 一鍵部署
+                <div class="tooltip"><span class="help-icon">?</span>
+                    <span class="tooltiptext">提供穩定的發布通道，AI 透過點哥工具箱的後台進行靜態網頁發布。</span>
+                </div>
+            </h3>
+            <p>讓 AI 具備直接將網頁發布到網路上的能力，免打指令。</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="netlify_deploy" onchange="toggleSkill('netlify_deploy', this.checked)">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div id="log-area">
+        [系統日誌] CKB-Hub 已就緒，請隨時啟用你需要的技能...<br>
+    </div>
+</div>
+
+<script>
+    // 在頁面載入時取得目前的技能狀態
+    window.onload = function() {
+        fetch('/api/status')
+            .then(response => response.json())
+            .then(data => {
+                for (const [skillId, isEnabled] of Object.entries(data)) {
+                    const toggle = document.getElementById(skillId);
+                    if (toggle) {
+                        toggle.checked = isEnabled;
+                    }
+                }
+            });
+    };
+
+    function toggleSkill(skillId, isEnabled) {
+        const logArea = document.getElementById('log-area');
+        const actionText = isEnabled ? '掛載' : '卸載';
+        const time = new Date().toLocaleTimeString();
+        
+        // Update UI Log
+        const logMsg = `[<span class="log-time">${time}</span>] 使用者切換開關，正在通知背景系統 <span class="log-action">${actionText}</span> ${skillId} 工具...<br>`;
+        logArea.innerHTML += logMsg;
+        logArea.scrollTop = logArea.scrollHeight;
+
+        // Send to Python Backend
+        fetch(`/api/toggle/${skillId}?enable=${isEnabled}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 'success') {
+                    logArea.innerHTML += `[<span class="log-time">${time}</span>] ✅ 完成！AI 編輯器已即時獲得此工具。<br>`;
+                } else {
+                    logArea.innerHTML += `[<span class="log-time">${time}</span>] <span class="log-warning">⚠️ 發生錯誤：${data.message}</span><br>`;
+                }
+                logArea.scrollTop = logArea.scrollHeight;
+            });
+    }
+</script>
+
+</body>
+</html>
