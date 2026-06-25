@@ -65,14 +65,28 @@
   2. **深度資料淨化**：寫了一支正則表達式腳本，一秒內拔除舊檔案中遺留的 YAML Frontmatter（如 `name: 09-gemini`）以及標題殘留的數字編號（如 `# 19-FTP`），讓注入給 AI 的提示詞達到最純淨、無干擾的狀態。
 * **哲學突破**：這確立了 CKB-Hub 的核心價值——我們不寫底層串接的「工程級 MCP」，我們打造的是「Prompt 注入型 MCP」。用 1% 的安裝難度，達成真正 MCP 95% 的自動化威力，完美實現對新手的「降維打擊」。
 
+### 階段六：終極模組化與全自動外掛架構 (The Auto-Discovery Plugin Architecture)
+* **核心挑戰**：為了達成「把檔案丟進去，網頁與 MCP 就自動生出按鈕與 API」的最高境界，我們移除了寫死在 HTML 與 Python 中的擴充架構。
+* **YAML 身分證 (Self-Contained Plugins)**：
+  1. 我們設計了 `SKILL_TEMPLATE.md` 標準格式樣板。
+  2. 將所有的 `.md` 規則檔案，頂部加入了 `YAML Frontmatter`（包含 `id`, `title`, `description`, `category`）。讓檔案自帶身分證，完全不需額外的清單。
+* **雙端動態重構**：
+  1. **後端 API (`main.py`)**：新增 `/api/skills`，啟動時自動掃描 `skills/` 資料夾的 Markdown 檔案並解析 YAML。
+  2. **前端 UI (`index.html`)**：完全移除寫死的 HTML，改由 JavaScript 讀取 API，動態產生分類面板與開關。
+  3. **動態工具註冊 (`mcp_stdio.py`)**：透過迴圈讀取技能型錄，使用 `mcp.add_tool()` 在啟動瞬間全自動註冊所有的 MCP API。
+* **漏洞填補**：為原本只有 Python 腳本的「點哥專案助理 (`project_assistant`)」與「GitHub 備份 (`github_backup`)」補齊了專屬的 `.md` 對話守則與規則說明書，確保 AI 引導初學者的體驗滴水不漏。
+
 ---
 
 ## 🛠️ 目前已實作的核心模組與功能
-1. **`main.py`**：輕量級 FastAPI 網頁伺服器，負責提供前端 UI 與處理安全關閉 (`/api/shutdown`)。
-2. **`mcp_stdio.py`**：核心 MCP 伺服器，負責與 AI 編輯器溝通。目前已內建 **18 項強大工具 API**（涵蓋專案助理、部署、資料庫、AI 工具、維護與知識庫）。
-3. **`static/index.html`**：初學者友善的零門檻開關控制台（支援六大分類與一鍵安全關閉）。
-4. **`使用手冊.md`**：詳細記載 18 項技能的用途與擴充指南。
+1. **`main.py`**：輕量級 FastAPI 網頁伺服器，負責提供前端 UI、動態讀取技能型錄 (`/api/skills`) 與處理安全關閉 (`/api/shutdown`)。
+2. **`mcp_stdio.py`**：核心 MCP 伺服器，負責與 AI 編輯器溝通。能在啟動時**動態註冊**所有的技能工具。
+3. **`static/index.html`**：初學者友善的零門檻開關控制台（完全動態渲染，支援一鍵安全關閉）。
+4. **`使用手冊.md`**：詳細記載技能的用途與「加掛新技能」的擴充指南。
+5. **`skills/` 目錄**：外掛技能的集中營，每個技能都是一個獨立且帶有 YAML 身分證的 `.md` 檔案。
 
 ## 🚀 未來發展計畫 (Roadmap)
-* **實作「自動尋找外掛」模式 (Auto-Discovery Plugin Architecture)**：
-  計畫建立 `plugins/` 目錄，支援動態讀取 `.json` 設定檔與腳本。將目前的「寫死在程式碼中的開關」進化為「把檔案丟進去就自動生出按鈕」，達成極致的外掛熱插拔體驗。
+* **多模型切換與高階設定 GUI**：
+  未來可將控制台進一步擴充，讓使用者能在網頁上輸入自己的 API Keys，並自動產生 `.env`。
+* **雲端技能市集 (Skill Marketplace)**：
+  讓網頁具備一鍵從 GitHub 下載其他大神撰寫的 `.md` 技能並瞬間啟用的功能。
