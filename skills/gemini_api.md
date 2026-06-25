@@ -1,3 +1,9 @@
+---
+id: gemini_api
+title: Gemini API 串接
+description: 引導申請 API Key 並在專案中實作 Gemini 串接。
+category: AI 工具與模型
+---
 # Gemini 免費 API 串接
 
 直接呼叫 Google 的 AI 能力來為你的網頁進行智慧加持。

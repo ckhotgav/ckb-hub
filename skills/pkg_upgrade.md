@@ -1,3 +1,9 @@
+---
+id: pkg_upgrade
+title: 套件衝突排解專家
+description: 專門解決 npm/pip 升級失敗、依賴衝突等棘手問題。
+category: 診斷與維護
+---
 # 一鍵升級工具
 
 將本機所有的 CLI 套件一鍵更新至最新版本。

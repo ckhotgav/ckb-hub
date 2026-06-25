@@ -4,6 +4,7 @@ import os
 import subprocess
 import urllib.request
 import webbrowser
+import re
 from datetime import datetime
 
 # 初始化 MetaMCP 聚合伺服器
@@ -15,15 +16,51 @@ STATUS_FILE = os.path.join(BASE_DIR, "status.json")
 # 記憶體內的 Session 狀態 (結合全域與專案專屬狀態)
 session_status = {}
 
+def get_skills_metadata():
+    """從 skills/ 資料夾中自動掃描所有 Markdown 檔案的 YAML 身分證"""
+    skills_dir = os.path.join(BASE_DIR, "skills")
+    skills = []
+    if not os.path.exists(skills_dir):
+        return skills
+        
+    for filename in os.listdir(skills_dir):
+        if filename.endswith(".md") and filename != "SKILL_TEMPLATE.md":
+            filepath = os.path.join(skills_dir, filename)
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    content = f.read()
+                
+                match = re.search(r"^---\n(.*?)\n---", content, re.DOTALL)
+                if match:
+                    yaml_content = match.group(1)
+                    skill_data = {}
+                    for line in yaml_content.split("\n"):
+                        if ":" in line:
+                            k, v = line.split(":", 1)
+                            skill_data[k.strip()] = v.strip()
+                    
+                    if "id" in skill_data and "title" in skill_data:
+                        skills.append(skill_data)
+            except Exception as e:
+                print(f"Error reading {filename}: {e}")
+    return skills
+
 def load_global_status():
     """讀取 CKB-Hub 網頁控制台設定的全域技能開關狀態"""
+    status = {}
     if os.path.exists(STATUS_FILE):
         try:
             with open(STATUS_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                status = json.load(f)
         except:
             pass
-    return {}
+            
+    # 確保所有掃描到的技能都有預設狀態
+    for skill in get_skills_metadata():
+        skill_id = skill["id"]
+        if skill_id not in status:
+            status[skill_id] = False
+    return status
 
 def is_skill_enabled(skill_id: str) -> bool:
     """檢查技能是否啟用 (全域開啟 或 專案專屬開啟)"""
@@ -179,6 +216,11 @@ def run_project_assistant(command: str, project_path: str = ".") -> str:
                 response += "1. 幫使用者總結今天完成的事項，並更新 PROJECT.md。\n"
                 response += "2. 詢問使用者是否需要呼叫 backup_to_github 備份到雲端。\n"
 
+    # 掛載 project_assistant 專屬對話守則
+    prompt = check_skill("project_assistant", "")
+    if "[👇 系統加載專屬技能指令" in prompt:
+        response += "\n\n" + prompt
+
     return response
 
 @mcp.tool()
@@ -210,111 +252,39 @@ def backup_to_github(commit_message: str, project_path: str = ".") -> str:
         # Git Push
         push_process = subprocess.run(["git", "push"], cwd=project_path, capture_output=True, text=True)
         
-        return f"[SUCCESS] GitHub 備份成功！\nCommit: {commit_message}\nPush 狀態: {push_process.stderr or push_process.stdout}"
+        result = f"[SUCCESS] GitHub 備份成功！\nCommit: {commit_message}\nPush 狀態: {push_process.stderr or push_process.stdout}"
     except subprocess.CalledProcessError as e:
-        return f"⚠️ Git 操作失敗。\n錯誤訊息: {e.stderr}"
+        result = f"⚠️ Git 操作失敗。\n錯誤訊息: {e.stderr}"
     except Exception as e:
-        return f"⚠️ 發生未知的錯誤: {e}"
-
-@mcp.tool()
-def deploy_to_netlify() -> str:
-    """
-    一鍵部署靜態網頁到 Netlify。
-    """
-    return check_skill("netlify_deploy", "Netlify 部署準備就緒！(請執行 npx netlify deploy --prod 或依據下方規則執行)")
-
-# ==========================================
-# 基礎設定與助理
-# ==========================================
-@mcp.tool()
-def setup_environment_variables() -> str:
-    """API 金鑰管家"""
-    return check_skill("env_setup", "請協助使用者建立 .env 檔案，並安全地檢查與配置重要的 API 金鑰。")
+        result = f"⚠️ 發生未知的錯誤: {e}"
+        
+    # 掛載 github_backup 專屬對話守則
+    prompt = check_skill("github_backup", "")
+    if "[👇 系統加載專屬技能指令" in prompt:
+        result += "\n\n" + prompt
+        
+    return result
 
 # ==========================================
-# 靜態與主機部署 (其餘部署工具)
+# 動態註冊外掛技能 (Auto-Discovery Plugin Architecture)
 # ==========================================
-@mcp.tool()
-def deploy_cloudflare() -> str:
-    """Cloudflare 網頁部署"""
-    return check_skill("cloudflare_deploy", "Cloudflare 部署啟動！請協助使用者使用 Wrangler CLI 將專案發布至 Cloudflare Pages 或 Workers。")
+def create_skill_tool(skill_id: str, skill_title: str):
+    """建立動態工具的工廠函數"""
+    def tool_func() -> str:
+        return check_skill(skill_id, f"【系統提示】您已呼叫 {skill_title} 技能！")
+    
+    # 動態設定函數名稱與文檔，讓 AI 能正確識別
+    tool_func.__name__ = f"run_{skill_id}"
+    tool_func.__doc__ = f"啟動或呼叫 {skill_title} 技能的專屬工具。"
+    return tool_func
 
-@mcp.tool()
-def deploy_to_gas() -> str:
-    """Google Apps Script 部署"""
-    return check_skill("gas_deploy", "請使用 clasp 工具協助使用者將本地程式碼推送到 Google Apps Script 專案。")
-
-@mcp.tool()
-def deploy_custom_server() -> str:
-    """自訂伺服器部署"""
-    return check_skill("custom_deploy", "請協助使用者撰寫 SSH 登入腳本或 RSYNC 同步指令以部署至自訂主機。")
-
-@mcp.tool()
-def deploy_ftp_hosting() -> str:
-    """傳統虛擬主機 FTP 部署"""
-    return check_skill("ftp_hosting", "請協助使用者設定 FTP 上傳腳本，將 dist/ 或 public/ 資料夾上傳至虛擬主機。")
-
-@mcp.tool()
-def deploy_ftp_php() -> str:
-    """PHP 專案 FTP 部署"""
-    return check_skill("ftp_php", "請協助使用者封裝 PHP 專案，避開 vendor/，並產生 FTP 自動上傳配置檔。")
-
-# ==========================================
-# 雲端資料庫
-# ==========================================
-@mcp.tool()
-def setup_supabase() -> str:
-    """Supabase 資料庫串接"""
-    return check_skill("supabase_setup", "Supabase 串接啟動！請引導使用者提供 URL 與 API Key，並協助設定 RLS 與 Table 結構。")
-
-@mcp.tool()
-def setup_firebase() -> str:
-    """Firebase 服務串接"""
-    return check_skill("firebase_setup", "Firebase 串接啟動！請協助整合 Firestore、Authentication 等 SDK。")
-
-# ==========================================
-# AI 工具與模型
-# ==========================================
-@mcp.tool()
-def export_to_notebooklm() -> str:
-    """匯出至 NotebookLM"""
-    return check_skill("notebooklm", "請將目前的原始碼架構、文件打包合併為單一 Markdown 檔，方便使用者匯入 NotebookLM 閱讀。")
-
-@mcp.tool()
-def setup_gemini_api() -> str:
-    """Gemini API 串接"""
-    return check_skill("gemini_api", "請協助使用者將 Google Gemini API 整合至專案中，並撰寫串接範例代碼。")
-
-# ==========================================
-# 專案與編輯器
-# ==========================================
-@mcp.tool()
-def sync_to_obsidian() -> str:
-    """Obsidian 知識庫同步"""
-    return check_skill("obsidian_sync", "請將本日的開發日誌轉換為 Obsidian 雙向連結格式，並儲存至使用者的筆記資料夾。")
-
-@mcp.tool()
-def guide_knowledge_base() -> str:
-    """專案知識庫導航"""
-    return check_skill("knowledge_guide", "請撰寫或更新 PROJECT.md 與 README.md，幫助快速了解專案目錄結構。")
-
-# ==========================================
-# 診斷與維護
-# ==========================================
-@mcp.tool()
-def run_project_doctor() -> str:
-    """專案健檢醫生"""
-    return check_skill("project_doctor", "健檢模式啟動！請對專案原始碼進行靜態分析，找出潛在的效能瓶頸與語法錯誤。")
-
-@mcp.tool()
-def upgrade_packages() -> str:
-    """套件衝突排解專家"""
-    return check_skill("pkg_upgrade", "請檢查 package.json 或 requirements.txt 中過期的套件，並協助安全升級。")
-
-@mcp.tool()
-def troubleshoot_errors() -> str:
-    """疑難排解專家"""
-    return check_skill("troubleshoot", "除錯模式啟動！請引導使用者貼上終端機錯誤日誌，並提供可能解決方案。")
+# 掃描並動態註冊所有技能
+_hardcoded_skills = ["project_assistant", "github_backup"]
+for skill in get_skills_metadata():
+    if skill["id"] not in _hardcoded_skills:
+        dynamic_tool = create_skill_tool(skill["id"], skill["title"])
+        mcp.add_tool(dynamic_tool, name=skill["id"], description=f"啟動 {skill['title']}")
+        print(f"[系統] 動態註冊工具: {skill['id']}")
 
 if __name__ == "__main__":
     # 使用 stdio 啟動 MCP 伺服器 (供 AI 編輯器串接)

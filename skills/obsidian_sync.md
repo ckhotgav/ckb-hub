@@ -1,3 +1,9 @@
+---
+id: obsidian_sync
+title: Obsidian 知識庫同步
+description: 幫你把開發日誌轉換為 Obsidian 雙向連結筆記。
+category: 專案與知識庫
+---
 # Obsidian 本地筆記連結
 
 將你的本地筆記庫「第二大腦」與 AI 助理直接打通。

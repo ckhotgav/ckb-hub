@@ -1,3 +1,9 @@
+---
+id: netlify_deploy
+title: Netlify 一鍵部署
+description: 讓 AI 具備直接將靜態網頁發布到網路上的能力。
+category: 靜態與主機部署
+---
 # Netlify 一鍵部署
 
 將寫好的精美靜態網頁（HTML / CSS / JS）一鍵發布到網路上。

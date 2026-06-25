@@ -1,3 +1,9 @@
+---
+id: notebooklm
+title: 匯出至 NotebookLM
+description: 將專案原始碼打包成適合 NotebookLM 閱讀的文本格式。
+category: AI 工具與模型
+---
 # NotebookLM 知識庫串接
 
 將 Google NotebookLM 的強大分析能力導入你的 AI 編輯器。

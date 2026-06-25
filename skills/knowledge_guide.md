@@ -1,3 +1,9 @@
+---
+id: knowledge_guide
+title: 專案知識庫導航
+description: 產生專案導讀文件，讓新的 AI 會話能光速上手程式碼。
+category: 專案與知識庫
+---
 # Obsidian 知識管理設定
 
 建立合理的筆記結構，讓你的知識庫井井有條。

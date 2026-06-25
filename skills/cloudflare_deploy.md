@@ -1,3 +1,9 @@
+---
+id: cloudflare_deploy
+title: Cloudflare 網頁部署
+description: 高速發布！讓 AI 協助將靜態網頁或 Fullstack 專案部署至 Cloudflare Pages。
+category: 靜態與主機部署
+---
 # 其他雲端部署平台
 
 除了 Netlify 之外，你也可以使用 Vercel 或 Cloudflare 部署你的網頁專案。

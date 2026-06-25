@@ -15,36 +15,55 @@ STATUS_FILE = os.path.join(BASE_DIR, "status.json")
 if not os.path.exists(STATIC_DIR):
     os.makedirs(STATIC_DIR)
 
-# 預設狀態 (包含所有 18 項技能)
-default_status = {
-    "project_assistant": False,
-    "env_setup": False,
-    "cloudflare_deploy": False,
-    "netlify_deploy": False,
-    "github_backup": False,
-    "gas_deploy": False,
-    "custom_deploy": False,
-    "ftp_hosting": False,
-    "ftp_php": False,
-    "supabase_setup": False,
-    "firebase_setup": False,
-    "notebooklm": False,
-    "gemini_api": False,
-    "obsidian_sync": False,
-    "knowledge_guide": False,
-    "project_doctor": False,
-    "pkg_upgrade": False,
-    "troubleshoot": False
-}
+import re
+
+def get_skills_metadata():
+    """從 skills/ 資料夾中自動掃描所有 Markdown 檔案的 YAML 身分證"""
+    skills_dir = os.path.join(BASE_DIR, "skills")
+    skills = []
+    if not os.path.exists(skills_dir):
+        return skills
+        
+    for filename in os.listdir(skills_dir):
+        if filename.endswith(".md") and filename != "SKILL_TEMPLATE.md":
+            filepath = os.path.join(skills_dir, filename)
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    content = f.read()
+                
+                # 使用正則表達式解析 YAML Frontmatter
+                match = re.search(r"^---\n(.*?)\n---", content, re.DOTALL)
+                if match:
+                    yaml_content = match.group(1)
+                    skill_data = {}
+                    for line in yaml_content.split("\n"):
+                        if ":" in line:
+                            k, v = line.split(":", 1)
+                            skill_data[k.strip()] = v.strip()
+                    
+                    # 確認身分證格式完整
+                    if "id" in skill_data and "title" in skill_data:
+                        skills.append(skill_data)
+            except Exception as e:
+                print(f"Error reading {filename}: {e}")
+    return skills
 
 def load_status():
+    """讀取技能開關狀態，若沒有紀錄則預設為 False"""
+    status = {}
     if os.path.exists(STATUS_FILE):
         try:
             with open(STATUS_FILE, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                status = json.load(f)
         except:
             pass
-    return default_status
+            
+    # 確保所有掃描到的技能都有預設狀態
+    for skill in get_skills_metadata():
+        skill_id = skill["id"]
+        if skill_id not in status:
+            status[skill_id] = False
+    return status
 
 def save_status(status_dict):
     with open(STATUS_FILE, 'w', encoding='utf-8') as f:
@@ -66,6 +85,11 @@ async def home():
 async def get_status():
     """取得目前的技能啟用狀態"""
     return load_status()
+
+@app.get("/api/skills")
+async def api_get_skills():
+    """取得全自動外掛系統掃描到的所有技能型錄"""
+    return get_skills_metadata()
 
 @app.post("/api/toggle/{skill_id}")
 async def toggle_skill(skill_id: str, enable: bool):

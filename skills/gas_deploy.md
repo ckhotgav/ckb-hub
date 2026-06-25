@@ -1,3 +1,9 @@
+---
+id: gas_deploy
+title: Google Apps Script 部署
+description: 協助編寫與部署 Google Apps Script 自動化腳本。
+category: 靜態與主機部署
+---
 # Google Apps Script 自動化
 
 利用 Google 的雲端腳本自動化寄信、處理試算表。

@@ -1,3 +1,9 @@
+---
+id: firebase_setup
+title: Firebase 服務
+description: 串接 Firebase Firestore 資料庫與身份認證。
+category: 雲端資料庫
+---
 # Firebase 雲端資料庫
 
 Google 提供的即時 NoSQL 資料庫。

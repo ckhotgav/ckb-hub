@@ -1,3 +1,9 @@
+---
+id: ftp_hosting
+title: 傳統虛擬主機 FTP
+description: 引導配置 FTP 參數，上傳靜態資源至傳統主機。
+category: 靜態與主機部署
+---
 # FTP 免費主機（網站架設）
 
 這個技能教你用免費主機把網頁放到網路上，讓任何人都能瀏覽。

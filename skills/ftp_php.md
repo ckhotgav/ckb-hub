@@ -1,3 +1,9 @@
+---
+id: ftp_php
+title: PHP 專案 FTP 部署
+description: 安全且結構化地發布 PHP 後端至 CPanel 虛擬主機。
+category: 靜態與主機部署
+---
 # PHP + MySQL 資料庫（進階延伸）
 
 **先决條件**：你已經完成技能 19，擁有免費主機帳號（ProFreeHost 或 InfinityFree）、已上傳網頁、並建立了 MySQL 資料庫。

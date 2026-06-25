@@ -1,3 +1,9 @@
+---
+id: project_doctor
+title: 專案健檢醫生
+description: 對全專案進行健康檢查，找出語法錯誤與效能瓶頸。
+category: 診斷與維護
+---
 # 系統健康檢查
 
 當你發現 AI 指令執行失敗時，請使用此技能。
