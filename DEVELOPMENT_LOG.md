@@ -48,5 +48,21 @@
 3. **`static/index.html`**：小白友善的零門檻開關控制台。
 4. **`utils/migration.py`**：一鍵升級腳本。
 
-## 🚀 下一步計畫 (Next Steps)
-完成目前的架構後，接下來的工作是「填補血肉」。我們計畫將舊版工具箱中剩餘的 18 個技能（包含 Supabase, Obsidian 知識庫等）逐一遷移，為每一個技能在 `mcp_stdio.py` 中撰寫對應的 `@mcp.tool()`，最終打造出完整的 21 技能完全體。
+### 階段四：18 技能完全體與使用者體驗優化 (The Final Polish)
+* **核心擴充**：成功將剩餘的 18 個核心技能（包含 Cloudflare 網頁部署、Supabase, Obsidian 知識庫等）全部遷移至 `mcp_stdio.py`。
+* **介面翻新**：在 `static/index.html` 中實作了乾淨俐落的六大分類，讓「小白使用者」能像逛 App Store 一樣輕鬆挑選需要的 AI 技能。
+* **安全與流程防護**：
+  1. **Git 防護機制**：建立嚴格的 `.gitignore`，確保 `status.json` 等本地開關狀態或環境變數不會被上傳到 GitHub。
+  2. **安全關閉機制 (Taskkill)**：解決了 Windows 環境下 Uvicorn `reload=True` 產生的「總管與工人」雙程序殘留問題。透過在網頁新增紅色的「關閉控制台」按鈕，實作了對父程序的 `taskkill`，確保伺服器能被瞬間且徹底地拔除。
+
+---
+
+## 🛠️ 目前已實作的核心模組與功能
+1. **`main.py`**：輕量級 FastAPI 網頁伺服器，負責提供前端 UI 與處理安全關閉 (`/api/shutdown`)。
+2. **`mcp_stdio.py`**：核心 MCP 伺服器，負責與 AI 編輯器溝通。目前已內建 **18 項強大工具 API**（涵蓋專案助理、部署、資料庫、AI 工具、維護與知識庫）。
+3. **`static/index.html`**：小白友善的零門檻開關控制台（支援六大分類與一鍵安全關閉）。
+4. **`使用手冊.md`**：詳細記載 18 項技能的用途與擴充指南。
+
+## 🚀 未來發展計畫 (Roadmap)
+* **實作「自動尋找外掛」模式 (Auto-Discovery Plugin Architecture)**：
+  計畫建立 `plugins/` 目錄，支援動態讀取 `.json` 設定檔與腳本。將目前的「寫死在程式碼中的開關」進化為「把檔案丟進去就自動生出按鈕」，達成極致的外掛熱插拔體驗。
