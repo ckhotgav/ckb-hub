@@ -10,6 +10,10 @@
 
 ## 🤖 AI 自動安裝標準作業流程 (SOP)
 
+### 步驟 0：舊版工具包升級偵測 (Upgrade Check)
+- 如果判斷使用者是**老客戶升級**（例如他們提到之前裝過舊版「點哥 AI 全能工具箱」或 `ckhotgav-agy-tools`）：
+- 請務必先溫馨提醒：「為了確保新版 CKB-Hub 運作順暢，**請您先前往編輯器的 MCP 設定頁面，把舊版的工具箱伺服器設定刪除，避免新舊衝突喔！**」
+
 ### 步驟 1：環境檢查 (Python Check)
 - 請在終端機中執行 `python --version`。
 - **如果未安裝 Python**：請用溫柔的語氣告訴使用者需要去官網下載 Python，並附上 [Python 官方下載連結](https://www.python.org/downloads/)。
