@@ -16,6 +16,8 @@
   - 網頁 UI 動態渲染分類與開關，並確保「點哥專案助理」與其分類置頂。
   - `mcp_stdio.py` 在啟動瞬間全自動向 MCP 註冊所有的技能 API。
 - [x] 撰寫初學者專屬的「點哥 AI 萬用工具箱：新手完全制霸手冊」與流程圖。
+- [x] **緊急修復專案助理：尋回並融合 `startup`, `shutdown`, `project-init` 核心流程。**
+- [x] **舊版儲存庫向下相容同步：移除 08/10，更新 09，並自動清理說明檔。**
 - [ ] 考慮未來擴充雲端技能市集 (Skill Marketplace)。
 
 ---
@@ -37,3 +39,8 @@
   * 解決 Uvicorn `reload=True` 導致的雙程序殘留問題，實作徹底追殺 Parent PID 的關閉機制。
   * 擴充技能：將 Gemini API 擴展為 `free_llm_api` (加入 Groq)，並打通專案導讀 (`knowledge_guide`) 與 Obsidian 知識庫的自動同步機制。
   * 產出給初學者的「新手完全制霸手冊」與系統運作流程圖。
+* **2026-06-25 專案助理靈魂修復與舊版同步**：
+  * 發現原本自動搬運漏抓了舊版 `13-project-assistant` 內的隱藏目錄 (`startup`, `shutdown`, `project-init`)。
+  * 手動重構並完美融合舊版三大核心流程至新版 `skills/project_assistant.md`。
+  * 救援舊版客製化範本（如 FTP `index.php`、`doctor` 破解說明）至 `skills/templates/` 隔離區以防 `main.py` 解析報錯。
+  * 對舊版儲存庫 (`ckhotgav-agy-tools` 與 `ckhotgav-tools`) 進行大掃除，移除 08 與 10、更新 09，並用 Python 正則腳本自動掃蕩修正所有舊版 Markdown 說明檔。
