@@ -58,7 +58,7 @@
 
 ### 4️⃣ AI 工具與模型 (魔法大擴充)
 * **匯出至 NotebookLM**：想讓 Google 超強的 NotebookLM 幫你分析專案？AI 會把整個專案的程式碼打包成一份像書本一樣容易閱讀的文字檔。
-* **Gemini API 串接**：教你如何申請 API Key，並在你的網頁或 App 中放入 Google 最新的 AI 機器人。
+* **免費 AI API 串接**：教你如何免費申請 API Key，並在你的網頁中快速放入 Google Gemini 或極速版 Groq (Llama 3) AI 機器人，同時教你怎麼寫測試程式！
 
 ### 5️⃣ 專案與知識庫 (打造你的第二大腦)
 * **Obsidian 知識庫同步**：自動把每天的開發歷程與除錯經驗，轉化為 Obsidian 雙向連結筆記，讓你累積知識不費力。
