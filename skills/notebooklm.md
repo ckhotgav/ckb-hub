@@ -3,7 +3,7 @@ name: 02-notebooklm
 description: NotebookLM 知識庫 — 安裝 CLI 並自動配置 AGY2 的 mcpServers 區塊。
 ---
 
-# 技能 02：NotebookLM 知識庫串接
+# NotebookLM 知識庫串接
 
 將 Google NotebookLM 的強大分析能力導入你的 AI 編輯器。
 

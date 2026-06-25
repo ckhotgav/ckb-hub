@@ -3,7 +3,7 @@ name: 05-gas
 description: Google Apps Script 自動化 — 安裝 clasp 並登入 Google，上傳自動化腳本。
 ---
 
-# 技能 05：Google Apps Script 自動化
+# Google Apps Script 自動化
 
 利用 Google 的雲端腳本自動化寄信、處理試算表。
 

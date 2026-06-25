@@ -3,7 +3,7 @@ name: 18-other-deploy
 description: 其他部署平台 — 簡介 Vercel、Cloudflare 臨時與正常部署。
 ---
 
-# 技能 18：其他雲端部署平台
+# 其他雲端部署平台
 
 除了 Netlify 之外，你也可以使用 Vercel 或 Cloudflare 部署你的網頁專案。
 

@@ -3,7 +3,7 @@ name: 04-netlify
 description: Netlify 一鍵部署 — 安裝 netlify-cli 執行登入，並依使用者確認進行部署。
 ---
 
-# 技能 04：Netlify 一鍵部署
+# Netlify 一鍵部署
 
 將寫好的精美靜態網頁（HTML / CSS / JS）一鍵發布到網路上。
 
