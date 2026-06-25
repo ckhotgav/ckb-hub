@@ -46,6 +46,22 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.02);
             border-color: #d5dbdb;
         }
+        .category {
+            margin-bottom: 30px;
+            background: #fdfdfd;
+            border: 1px solid #edf2f7;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .category-title {
+            color: #34495e;
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
         .skill-info {
             flex-grow: 1;
         }
@@ -176,55 +192,47 @@
     <h1>CKB-Hub 點哥AI萬用工具箱</h1>
     <p class="subtitle">簡單、乾淨、一鍵管理你的所有 AI 技能，徹底拋棄複雜的指令與設定檔。</p>
 
-    <!-- Skill 1 -->
-    <div class="skill-card">
-        <div class="skill-info">
-            <h3>
-                點哥專案助理 (核心)
-                <div class="tooltip"><span class="help-icon">?</span>
-                    <span class="tooltiptext">這項工具能讓 AI 讀懂你的開發進度表。啟用後，只需對 AI 說「開工」或「收工」，它就會自動幫你記錄與備份。</span>
-                </div>
-            </h3>
-            <p>自動幫你建立專案結構、管理進度表，並支援開工與收工流程。</p>
-        </div>
-        <label class="switch">
-            <input type="checkbox" id="project_assistant" onchange="toggleSkill('project_assistant', this.checked)">
-            <span class="slider"></span>
-        </label>
+    <!-- Categories -->
+    <div class="category">
+        <h2 class="category-title">基礎設定與助理 (Base Settings & Assistant)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>01. 點哥專案助理 (核心)<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">這項工具能讓 AI 讀懂你的開發進度表。啟用後，只需對 AI 說「開工」或「收工」，它就會自動幫你記錄與備份。</span></div></h3><p>自動幫你建立專案結構、管理進度表，並支援開工與收工流程。</p></div><label class="switch"><input type="checkbox" id="project_assistant" onchange="toggleSkill('project_assistant', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>API 金鑰管家<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">協助建立與管理 .env 檔案。</span></div></h3><p>安全地引導使用者配置系統環境變數與敏感金鑰，避免外洩。</p></div><label class="switch"><input type="checkbox" id="env_setup" onchange="toggleSkill('env_setup', this.checked)"><span class="slider"></span></label></div>
     </div>
 
-    <!-- Skill 2 -->
-    <div class="skill-card">
-        <div class="skill-info">
-            <h3>
-                GitHub 自動備份
-                <div class="tooltip"><span class="help-icon">?</span>
-                    <span class="tooltiptext">讓 AI 安全地與你的 GitHub 互動。不再需要讓 AI 自己去打 git commit 指令，此工具提供穩定、防護的備份 API。</span>
-                </div>
-            </h3>
-            <p>提供 AI 穩定的 GitHub 同步能力，不再發生終端機指令錯誤。</p>
-        </div>
-        <label class="switch">
-            <input type="checkbox" id="github_backup" onchange="toggleSkill('github_backup', this.checked)">
-            <span class="slider"></span>
-        </label>
+    <div class="category">
+        <h2 class="category-title">靜態與主機部署 (Deploy & Hosting)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>Cloudflare 網頁部署<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">使用 Wrangler CLI 部署。</span></div></h3><p>高速發布！讓 AI 協助將靜態網頁或 Fullstack 專案部署至 Cloudflare Pages。</p></div><label class="switch"><input type="checkbox" id="cloudflare_deploy" onchange="toggleSkill('cloudflare_deploy', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>Netlify 一鍵部署<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">提供穩定的發布通道。</span></div></h3><p>讓 AI 具備直接將靜態網頁發布到網路上的能力。</p></div><label class="switch"><input type="checkbox" id="netlify_deploy" onchange="toggleSkill('netlify_deploy', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>GitHub 自動備份<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">提供穩定的防護備份 API。</span></div></h3><p>提供 AI 穩定的 GitHub 同步能力，不再發生終端機指令錯誤。</p></div><label class="switch"><input type="checkbox" id="github_backup" onchange="toggleSkill('github_backup', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>Google Apps Script 部署<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">使用 clasp 部署 GAS。</span></div></h3><p>協助編寫與部署 Google Apps Script 自動化腳本。</p></div><label class="switch"><input type="checkbox" id="gas_deploy" onchange="toggleSkill('gas_deploy', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>自訂伺服器部署<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">SSH/RSYNC 自訂部署。</span></div></h3><p>協助設定與部署程式碼至私有 VPS 或自訂主機。</p></div><label class="switch"><input type="checkbox" id="custom_deploy" onchange="toggleSkill('custom_deploy', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>傳統虛擬主機 FTP<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">自動化 FTP 傳輸。</span></div></h3><p>引導配置 FTP 參數，上傳靜態資源至傳統主機。</p></div><label class="switch"><input type="checkbox" id="ftp_hosting" onchange="toggleSkill('ftp_hosting', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>PHP 專案 FTP 部署<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">專為 PHP 環境設計的 FTP 部署。</span></div></h3><p>安全且結構化地發布 PHP 後端至 CPanel 虛擬主機。</p></div><label class="switch"><input type="checkbox" id="ftp_php" onchange="toggleSkill('ftp_php', this.checked)"><span class="slider"></span></label></div>
     </div>
 
-    <!-- Skill 3 -->
-    <div class="skill-card">
-        <div class="skill-info">
-            <h3>
-                Netlify 一鍵部署
-                <div class="tooltip"><span class="help-icon">?</span>
-                    <span class="tooltiptext">提供穩定的發布通道，AI 透過點哥工具箱的後台進行靜態網頁發布。</span>
-                </div>
-            </h3>
-            <p>讓 AI 具備直接將網頁發布到網路上的能力，免打指令。</p>
-        </div>
-        <label class="switch">
-            <input type="checkbox" id="netlify_deploy" onchange="toggleSkill('netlify_deploy', this.checked)">
-            <span class="slider"></span>
-        </label>
+    <div class="category">
+        <h2 class="category-title">雲端資料庫 (Cloud Databases)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>Supabase 資料庫<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">協助建立 PostgreSQL 與 RLS。</span></div></h3><p>引導串接 Supabase，處理資料庫表結構與身份驗證。</p></div><label class="switch"><input type="checkbox" id="supabase_setup" onchange="toggleSkill('supabase_setup', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>Firebase 服務<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">協助初始化 Firebase SDK。</span></div></h3><p>串接 Firebase Firestore 資料庫與身份認證。</p></div><label class="switch"><input type="checkbox" id="firebase_setup" onchange="toggleSkill('firebase_setup', this.checked)"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">AI 工具與模型 (AI & Models)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>匯出至 NotebookLM<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">整理專案給 NotebookLM 讀取。</span></div></h3><p>將專案原始碼打包成適合 NotebookLM 閱讀的文本格式。</p></div><label class="switch"><input type="checkbox" id="notebooklm" onchange="toggleSkill('notebooklm', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>Gemini API 串接<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">整合 Google Gemini AI。</span></div></h3><p>引導申請 API Key 並在專案中實作 Gemini 串接。</p></div><label class="switch"><input type="checkbox" id="gemini_api" onchange="toggleSkill('gemini_api', this.checked)"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">專案與知識庫 (Project & Knowledge)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>Obsidian 知識庫同步<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">將日誌整理為 Obsidian 格式。</span></div></h3><p>幫你把開發日誌轉換為 Obsidian 雙向連結筆記。</p></div><label class="switch"><input type="checkbox" id="obsidian_sync" onchange="toggleSkill('obsidian_sync', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>專案知識庫導航<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">協助 AI 快速了解大型專案。</span></div></h3><p>產生專案導讀文件，讓新的 AI 會話能光速上手程式碼。</p></div><label class="switch"><input type="checkbox" id="knowledge_guide" onchange="toggleSkill('knowledge_guide', this.checked)"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="category">
+        <h2 class="category-title">診斷與維護 (Diagnostics & Maintenance)</h2>
+        <div class="skill-card"><div class="skill-info"><h3>專案健檢醫生<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">全面掃描潛在 Bug。</span></div></h3><p>對全專案進行健康檢查，找出語法錯誤與效能瓶頸。</p></div><label class="switch"><input type="checkbox" id="project_doctor" onchange="toggleSkill('project_doctor', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>套件衝突排解專家<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">解決套件地獄。</span></div></h3><p>專門解決 npm/pip 升級失敗、依賴衝突等棘手問題。</p></div><label class="switch"><input type="checkbox" id="pkg_upgrade" onchange="toggleSkill('pkg_upgrade', this.checked)"><span class="slider"></span></label></div>
+        <div class="skill-card"><div class="skill-info"><h3>疑難排解大師<div class="tooltip"><span class="help-icon">?</span><span class="tooltiptext">遇到死胡同時的終極救星。</span></div></h3><p>啟用深度的除錯模式，解決卡關超過 30 分鐘的疑難雜症。</p></div><label class="switch"><input type="checkbox" id="troubleshoot" onchange="toggleSkill('troubleshoot', this.checked)"><span class="slider"></span></label></div>
     </div>
 
     <div id="log-area">
