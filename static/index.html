@@ -278,12 +278,10 @@
                     <div style="display:flex; justify-content:center; align-items:center; height:100vh; background-color:#f5f7fa; font-family:sans-serif;">
                         <div style="text-align:center; background:white; padding:40px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.05);">
                             <h2 style="color:#2ecc71;">✅ 伺服器已安全關閉</h2>
-                            <p style="color:#7f8c8d;">您可以直接關閉此瀏覽器分頁了！</p>
+                            <p style="color:#7f8c8d;">您可以直接手動關閉此瀏覽器分頁了！</p>
                         </div>
                     </div>
                 `;
-                // 嘗試關閉視窗 (對於腳本開啟的視窗有效)
-                setTimeout(() => { window.close(); }, 2000);
             })
             .catch(() => {
                 // Ignore errors since server dying might cause fetch to fail
