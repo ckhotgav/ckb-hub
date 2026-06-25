@@ -115,6 +115,13 @@ async def shutdown_server():
     
     async def commit_suicide():
         await asyncio.sleep(1)
+        import platform
+        import signal
+        parent_pid = os.getppid()
+        if platform.system() == "Windows":
+            os.system(f"taskkill /F /PID {parent_pid} /T")
+        else:
+            os.kill(parent_pid, signal.SIGTERM)
         os._exit(0)
         
     asyncio.create_task(commit_suicide())
