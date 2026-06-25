@@ -15,11 +15,26 @@ STATUS_FILE = os.path.join(BASE_DIR, "status.json")
 if not os.path.exists(STATIC_DIR):
     os.makedirs(STATIC_DIR)
 
-# 預設狀態
+# 預設狀態 (包含所有 18 項技能)
 default_status = {
     "project_assistant": False,
-    "github_backup": False,
+    "env_setup": False,
+    "cloudflare_deploy": False,
     "netlify_deploy": False,
+    "github_backup": False,
+    "gas_deploy": False,
+    "custom_deploy": False,
+    "ftp_hosting": False,
+    "ftp_php": False,
+    "supabase_setup": False,
+    "firebase_setup": False,
+    "notebooklm": False,
+    "gemini_api": False,
+    "obsidian_sync": False,
+    "knowledge_guide": False,
+    "project_doctor": False,
+    "pkg_upgrade": False,
+    "troubleshoot": False
 }
 
 def load_status():
@@ -66,6 +81,20 @@ async def toggle_skill(skill_id: str, enable: bool):
     print(f"\n[系統] 正在 {action} 技能: {skill_id}")
     
     return {"status": "success", "skill_id": skill_id, "enabled": enable}
+
+import asyncio
+
+@app.post("/api/shutdown")
+async def shutdown_server():
+    """關閉伺服器與網頁"""
+    print("\n[系統] 收到關閉指令，CKB-Hub 伺服器將在 1 秒後關閉...")
+    
+    async def commit_suicide():
+        await asyncio.sleep(1)
+        os._exit(0)
+        
+    asyncio.create_task(commit_suicide())
+    return {"status": "success", "message": "伺服器即將關閉"}
 
 if __name__ == "__main__":
     print("==================================================")

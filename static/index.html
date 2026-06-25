@@ -238,6 +238,13 @@
     <div id="log-area">
         [系統日誌] CKB-Hub 已就緒，請隨時啟用你需要的技能...<br>
     </div>
+
+    <div style="text-align: center; margin-top: 25px;">
+        <button id="shutdown-btn" onclick="shutdownServer()" style="background-color: #e74c3c; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 1em; cursor: pointer; font-weight: bold; transition: background-color 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+            🛑 關閉控制台與背景伺服器
+        </button>
+        <p style="color: #95a5a6; font-size: 0.85em; margin-top: 10px;">設定完成後即可關閉，AI 仍可正常讀取你的技能設定。</p>
+    </div>
 </div>
 
 <script>
@@ -254,6 +261,34 @@
                 }
             });
     };
+
+    function shutdownServer() {
+        if (!confirm("確定要關閉控制台伺服器嗎？（目前的開關設定已自動儲存，關閉後不影響 AI 使用技能）")) {
+            return;
+        }
+        
+        const btn = document.getElementById('shutdown-btn');
+        btn.innerText = "關閉中...";
+        btn.style.backgroundColor = "#c0392b";
+        btn.disabled = true;
+
+        fetch('/api/shutdown', { method: 'POST' })
+            .then(() => {
+                document.body.innerHTML = `
+                    <div style="display:flex; justify-content:center; align-items:center; height:100vh; background-color:#f5f7fa; font-family:sans-serif;">
+                        <div style="text-align:center; background:white; padding:40px; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+                            <h2 style="color:#2ecc71;">✅ 伺服器已安全關閉</h2>
+                            <p style="color:#7f8c8d;">您可以直接關閉此瀏覽器分頁了！</p>
+                        </div>
+                    </div>
+                `;
+                // 嘗試關閉視窗 (對於腳本開啟的視窗有效)
+                setTimeout(() => { window.close(); }, 2000);
+            })
+            .catch(() => {
+                // Ignore errors since server dying might cause fetch to fail
+            });
+    }
 
     function toggleSkill(skillId, isEnabled) {
         const logArea = document.getElementById('log-area');
