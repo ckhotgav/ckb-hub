@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>點哥AI全能工具箱</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #c9d1d9; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; }
+        header { background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); padding: 4rem 2rem; text-align: center; border-bottom: 1px solid #30363d; }
+        h1 { font-size: 2.8rem; background: linear-gradient(90deg, #58a6ff, #3fb950); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+        header p { font-size: 1.2rem; color: #8b949e; }
+        main { flex: 1; max-width: 800px; margin: 0 auto; padding: 2rem; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; color: #58a6ff; margin-bottom: 1rem; }
+        .card p { margin-bottom: 0.8rem; }
+        .highlight { background: #1f2937; border-left: 4px solid #f0883e; padding: 1rem 1.2rem; border-radius: 0 8px 8px 0; margin: 1rem 0; }
+        .highlight strong { color: #f0883e; }
+        a { color: #58a6ff; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+        li { margin-bottom: 0.4rem; }
+        .glossary { display: grid; grid-template-columns: 1fr 2fr; gap: 0.5rem; margin-top: 1rem; }
+        .glossary dt { color: #58a6ff; font-weight: bold; }
+        .glossary dd { color: #c9d1d9; }
+        footer { text-align: center; padding: 1.5rem; border-top: 1px solid #30363d; color: #8b949e; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>點哥AI全能工具箱</h1>
+        <p>你的 AI 編輯器新手懶人包</p>
+    </header>
+    <main>
+        <div class="card">
+            <h2>什麼是「點哥AI全能工具箱」？</h2>
+            <p>這是一套專為「完全不懂程式」的新手設計的 AI 開發環境懶人包。只要安裝好工具包，你就能對 AI 編輯器說一句話，讓它幫你完成整個開發流程——從建立網頁、串接資料庫，到自動部署上線。</p>
+            <p>目前收錄 <strong>21 項技能</strong>，涵蓋：</p>
+            <ul>
+                <li>環境建置（Node.js、Python、Git）</li>
+                <li>NotebookLM 知識庫串接</li>
+                <li>GitHub 版本控制</li>
+                <li>Netlify / GAS / Firebase 部署</li>
+                <li>本地 AI（Ollama / Gemini）</li>
+                <li>Obsidian 知識管理</li>
+                <li>FTP 免費主機架站（ProFreeHost / InfinityFree）</li>
+                <li>PHP + MySQL 動態網站</li>
+            </ul>
+            <p>查看完整工具包：<a href="https://github.com/ckhotgav/ckhotgav-tools">github.com/ckhotgav/ckhotgav-tools</a></p>
+        </div>
+
+        <div class="card">
+            <h2>概念小教室</h2>
+            <dl class="glossary">
+                <dt>🌐 網站主機</dt>
+                <dd>就像在網路上「租一塊地來蓋房子」——主機就是那塊地，你的網頁檔案和資料庫都放在裡面。</dd>
+                <dt>📁 FTP</dt>
+                <dd>就像網路的「檔案總管」，把你的電腦檔案傳送到主機上。傳上去之後，全世界都能看到你的網站。</dd>
+                <dt>⚡ PHP</dt>
+                <dd>讓網頁「會動」的程式語言，可以從資料庫撈資料即時顯示。</dd>
+                <dt>🗄️ MySQL</dt>
+                <dd>存放網站資料的軟體（會員名單、文章內容等）。PHP 負責讀寫，MySQL 負責儲存。</dd>
+            </dl>
+        </div>
+
+        <div class="card highlight">
+            <strong>⚠️ 免費主機提醒</strong>
+            <p>本頁面由免費主機代管，僅供練習用途。若要正式上線，建議購買付費主機。</p>
+            <p>免費主機若連續 30 天無人瀏覽，會發信警告，仍無處理將刪除帳號。</p>
+        </div>
+    </main>
+    <footer>
+        <p>由免費主機代管 &nbsp;|&nbsp; 點哥AI全能工具箱 &copy; 2026</p>
+    </footer>
+</body>
+</html>
